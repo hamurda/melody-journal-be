@@ -19,7 +19,7 @@ Globals:
 Parameters:
   Stage:
     Type: String
-    Default: Dev
+    Default: dev
 
 Resources:
   GetEntries:
