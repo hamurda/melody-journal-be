@@ -8,7 +8,7 @@ phases:
       - sam --version
   build:
     commands:
-      - sam package --template-file template.yml --stack-name melody-journal-be --parameter-overrides Stage=$ENV_NAME --capabilities "CAPABILITY_IAM"
+      - sam deploy --template-file template.yml --stack-name melody-journal-be --parameter-overrides Stage=$ENV_NAME --capabilities "CAPABILITY_IAM"
   post_build:
     commands:
       - echo Deployment completed
