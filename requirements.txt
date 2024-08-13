@@ -1,0 +1,3 @@
+boto3==1.34.149
+botocore==1.34.149
+pydantic==2.8.2

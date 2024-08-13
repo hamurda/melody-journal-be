@@ -1,0 +1,114 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Melody Journal Backend
+
+Globals:
+  Function:
+    Timeout: 5
+    MemorySize: 128
+    Runtime: python3.10
+    Environment:
+      Variables:
+        JOURNAL_ENTRIES_TABLE: !Ref JournalEntriesTable
+  Api:
+    Cors:
+      AllowMethods: "'POST, GET, PATCH, DELETE'"
+      AllowHeaders: "'Accept, Content-Type, Content-Length, Authorization, X-Amz-Date,X-Api-Key,X-Amz-Security-Token, X-Amz-User-Agent, User-Id'"
+      AllowOrigin: "'*'"
+
+Parameters:
+  Stage:
+    Type: String
+    Default: Dev
+
+Resources:
+  GetEntries:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/entry/get_entries.get_entries_handler
+      Policies: AmazonDynamoDBReadOnlyAccess
+      Events:
+        GetEntries:
+          Type: Api
+          Properties:
+            Path: /entry
+            Method: get
+
+  GetEntry:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/entry/get_entry.get_entry_handler
+      Policies: AmazonDynamoDBReadOnlyAccess
+      Events:
+        GetEntry:
+          Type: Api
+          Properties:
+            Path: /entry/{entry_id}
+            Method: get
+  
+  CreateEntry:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/entry/create_entry.create_entry_handler
+      Policies: AmazonDynamoDBFullAccess
+      Events:
+        CreateEntry:
+          Type: Api
+          Properties:
+            Path: /entry
+            Method: post
+      
+  UpdateEntry:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/entry/update_entry.update_entry_handler
+      Policies: AmazonDynamoDBFullAccess
+      Events:
+        UpdateEntry:
+          Type: Api
+          Properties:
+            Path: /entry
+            Method: patch
+
+  DeleteEntry:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/entry/delete_entry.delete_entry_handler
+      Policies: AmazonDynamoDBFullAccess
+      Events:
+        DeleteEntry:
+          Type: Api
+          Properties:
+            Path: /entry
+            Method: delete
+
+  JournalEntriesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub journal-entries-${Stage}
+      AttributeDefinitions:
+        - AttributeName: UserId
+          AttributeType: S
+        - AttributeName: Timestamp
+          AttributeType: N
+        - AttributeName: EntryId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: UserId
+          KeyType: HASH
+        - AttributeName: Timestamp
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+      GlobalSecondaryIndexes:
+        - IndexName: EntryIdIndex
+          KeySchema:
+            - AttributeName: EntryId
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 5
+            WriteCapacityUnits: 5
+
