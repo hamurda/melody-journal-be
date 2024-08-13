@@ -3,12 +3,13 @@ phases:
   install:
     runtime-versions:
         python: 3.10
-  pre_build:
     commands:
-      - sam --version
+      - pip install -r requirements.txt
   build:
     commands:
-      - sam deploy --template-file template.yml --stack-name melody-journal-be --parameter-overrides Stage=$ENV_NAME --capabilities "CAPABILITY_IAM"
+      - sam build
+      - echo sam build completed
+      - sam deploy --stack-name melody-journal-be --parameter-overrides Stage=$ENV_NAME --capabilities "CAPABILITY_IAM"
   post_build:
     commands:
       - echo Deployment completed
