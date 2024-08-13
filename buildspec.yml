@@ -9,7 +9,7 @@ phases:
     commands:
       - sam build
       - echo sam build completed
-      - sam deploy --stack-name melody-journal-be --parameter-overrides Stage=$ENV_NAME --capabilities "CAPABILITY_IAM"
+      - sam deploy --stack-name melody-journal-be --parameter-overrides Stage=$ENV_NAME --capabilities "CAPABILITY_IAM" --no-confirm-changeset
   post_build:
     commands:
       - echo Deployment completed
