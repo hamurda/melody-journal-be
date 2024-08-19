@@ -38,11 +38,11 @@ def update_entry_handler(event, context):
                 },
                 ExpressionAttributeValues = {
                     ':uid': journal_entry_dict["UserId"],
-                    ':new_entry' : journal_entry_dict["Entry"],
+                    ':new_content' : journal_entry_dict["Content"],
                     ':eid' : journal_entry_dict["EntryId"],
                     ':tags' : journal_entry_dict["Tags"],
                 },
-                UpdateExpression = "SET Entry = :new_entry, Tags = :tags",
+                UpdateExpression = "SET Content = :new_content, Tags = :tags",
                 ConditionExpression = "UserId = :uid AND EntryId = :eid",
                 ReturnValues = 'UPDATED_NEW'
             )
