@@ -9,9 +9,7 @@ from ...models.journal_entry import JournalEntry
 
 
 dynamodb_client = boto3.client("dynamodb")
-
-# table_name = os.environ.get("JOURNAL_ENTRIES_TABLE")
-table_name = "journal-entries-dev"
+table_name = os.environ.get("JOURNAL_ENTRIES_TABLE")
 response_headers = get_response_headers()
 
 def create_entry_handler(event, context):
