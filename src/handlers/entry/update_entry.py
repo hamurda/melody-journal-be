@@ -24,7 +24,7 @@ def update_entry_handler(event, context):
         journal_entry = JournalEntry(
             user_id = get_user_id(event),
             timestamp=upd_entry["timestamp"],
-            entry_id=upd_entry["entry_id"],
+            entry_id=upd_entry["entryId"],
             content=upd_entry["content"],
             tags=upd_entry["tags"]
         )
