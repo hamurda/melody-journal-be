@@ -2,8 +2,6 @@ from math import floor
 from datetime import datetime
 import uuid
 
-from ...models.journal_entry import JournalEntry
-
 def get_response_headers():
     return {
             "Access-Control-Allow-Headers": 'User-Id',
