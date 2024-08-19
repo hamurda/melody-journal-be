@@ -8,7 +8,7 @@ def get_response_headers():
     return {
             "Access-Control-Allow-Headers": 'User-Id',
             "Access-Control-Allow-Methods": 'POST, GET, PATCH, DELETE',
-            "Access-Control-Allow-Origin" : "*"
+            "Access-Control-Allow-Origin" : '*'
            }
 
 def get_user_id(event):
