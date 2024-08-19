@@ -6,7 +6,7 @@ from botocore import exceptions
 from .utils import get_response_headers
  
 dynamodb_client = boto3.client("dynamodb")
-table_name = os.environ.get("JOURNAL_ENTRIES_TABLE")
+table_name = os.environ.get("JOURNAL_ENTRIES_TABLE", "journal-entries-dev")
 response_headers = get_response_headers()
 
 def get_entry_handler(event, context):
