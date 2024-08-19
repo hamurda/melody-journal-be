@@ -10,7 +10,8 @@ from ...models.journal_entry import JournalEntry
 
 dynamodb_client = boto3.client("dynamodb")
 
-table_name = os.environ.get("JOURNAL_ENTRIES_TABLE")
+# table_name = os.environ.get("JOURNAL_ENTRIES_TABLE")
+table_name = "journal-entries-dev"
 response_headers = get_response_headers()
 
 def create_entry_handler(event, context):
@@ -20,7 +21,7 @@ def create_entry_handler(event, context):
             "headers" : response_headers
         }
 
-        new_entry = json.loads(event["body"])["entry"]
+        new_entry = json.loads(event["body"])
         journal_entry = JournalEntry(
             user_id = get_user_id(event),
             timestamp=get_current_time(),

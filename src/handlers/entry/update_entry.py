@@ -13,7 +13,7 @@ table_name = os.environ.get("JOURNAL_ENTRIES_TABLE")
 response_headers = get_response_headers()
 
 def update_entry_handler(event, context):
-    upd_entry = json.loads(event['body'])["entry"]
+    upd_entry = json.loads(event['body'])
 
     try:
         response = { 
