@@ -22,7 +22,7 @@ class JournalEntry(BaseModel):
             "UserId": {"S": self.user_id},
             "Timestamp": {"N": str(self.timestamp)},
             "EntryId": {"S": self.entry_id},
-            "Entry": {"S": self.content},
+            "Content": {"S": self.content},
             "Tags": {"SS": [tag.value for tag in self.tags]},
         }
     
@@ -31,7 +31,7 @@ class JournalEntry(BaseModel):
             "EntryId": item["EntryId"]["S"],
             "UserId": item["UserId"]["S"],
             "Timestamp": int(item["Timestamp"]["N"]),
-            "Entry": item["Entry"]["S"],
+            "Content": item["Content"]["S"],
             "Tags": item["Tags"]["SS"]
         }
     
