@@ -12,6 +12,7 @@ table_name = os.environ.get("JOURNAL_ENTRIES_TABLE", "journal-entries-dev")
 response_headers = get_response_headers()
 
 def get_entries_handler(event, context):
+    print(event)
     params = {
         'TableName' : table_name,
         'KeyConditionExpression' : "UserId = :userid",
