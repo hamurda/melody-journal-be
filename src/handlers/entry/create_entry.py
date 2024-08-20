@@ -4,7 +4,7 @@ import boto3
 import os
 from botocore import exceptions
 from pydantic import ValidationError
-from .utils import get_current_time, get_response_headers, get_user_id, generate_entry_id
+from ..utils import get_current_time, get_response_headers, get_user_id, generate_entry_id
 from ...models.journal_entry import JournalEntry
 
 

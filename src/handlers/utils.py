@@ -9,6 +9,9 @@ def get_response_headers():
             "Access-Control-Allow-Origin" : '*'
            }
 
+def get_id_token(event):
+    return event['headers']['Authorization']
+
 def get_user_id(event):
     if event['headers']['user-id']:
         return event['headers']['user-id']

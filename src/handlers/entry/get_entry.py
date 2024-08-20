@@ -3,7 +3,7 @@ import json
 import boto3
 import os
 from botocore import exceptions
-from .utils import get_response_headers
+from ..utils import get_response_headers
  
 dynamodb_client = boto3.client("dynamodb")
 table_name = os.environ.get("JOURNAL_ENTRIES_TABLE", "journal-entries-dev")

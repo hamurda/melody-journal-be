@@ -3,7 +3,7 @@ import json
 import boto3
 import os
 from botocore import exceptions
-from .utils import get_response_headers, get_user_id
+from ..utils import get_response_headers, get_user_id
 
 
 dynamodb_client = boto3.client("dynamodb")

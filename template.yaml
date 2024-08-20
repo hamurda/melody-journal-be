@@ -10,7 +10,11 @@ Globals:
     Environment:
       Variables:
         JOURNAL_ENTRIES_TABLE: !Ref JournalEntriesTable
+        COGNITO_IDP_ID : ap-southeast-2:c3e32c8b-59d5-4d36-bb95-29857d0844d8
+
   Api:
+    Auth:
+      DefaultAuthorizer: AWS_IAM
     Cors:
       AllowMethods: "'POST, GET, PATCH, DELETE'"
       AllowHeaders: "'Accept, Content-Type, Content-Length, Authorization, X-Amz-Date,X-Api-Key,X-Amz-Security-Token, X-Amz-User-Agent, User-Id'"
@@ -22,6 +26,17 @@ Parameters:
     Default: dev
 
 Resources:
+  AuthGoogle:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/auth/auth_google.auth_google_handler
+      Events:
+        GetEntries:
+          Type: Api
+          Properties:
+            Path: /auth
+            Method: get
+
   GetEntries:
     Type: AWS::Serverless::Function
     Properties:

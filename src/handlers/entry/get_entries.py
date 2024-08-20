@@ -3,7 +3,7 @@ import json
 import boto3
 import os
 from botocore import exceptions
-from .utils import get_user_id, get_response_headers
+from ..utils import get_user_id, get_response_headers
 from ...models.journal_entry import JournalEntry
 
 
