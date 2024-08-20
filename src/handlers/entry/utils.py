@@ -10,6 +10,8 @@ def get_response_headers():
            }
 
 def get_user_id(event):
+    if event['headers']['user-id']:
+        return event['headers']['user-id']
     return event['headers']['User-Id']
 
 def generate_entry_id():
